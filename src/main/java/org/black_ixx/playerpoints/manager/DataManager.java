@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Timer;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
@@ -54,7 +55,10 @@ public class DataManager extends AbstractDataManager implements Listener {
         this.pendingUsernameUpdates = new ConcurrentHashMap<>();
 
         Bukkit.getPluginManager().registerEvents(this, rosePlugin);
-        Bukkit.getScheduler().runTaskTimerAsynchronously(rosePlugin, this::update, 10L, 10L);
+        // Bukkit.getScheduler().runTaskTimerAsynchronously(rosePlugin, this::update, 10L, 10L);
+        new Timer().shedule(()->{
+            update();
+        },0L,500L);
     }
 
     @Override
